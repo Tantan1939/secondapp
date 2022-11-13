@@ -1,0 +1,59 @@
+{% extends 'base1.html' %}
+{% block content %}
+{% load std_portal %}
+
+<!-- Message from messages framework / views.py -->
+{% if messages %}
+<div class="container col-md-3">
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}> {{message}} </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+
+<form id="this_form" method="post">
+    {% csrf_token %}
+
+    {{ form.non_field_errors }}
+
+    <div class="container col-md-3">
+        <h4> Registration Form </h4>
+
+        <div class="form-outline mb-4">
+            {{ form.name.errors }}
+            <label for="{{ form.name.id_for_label }}" class="form-label"> Name: </label>
+            {{ form.name|addclass:"form-control"}}
+        </div>
+
+        <div class="form-outline mb-4">
+            {{ form.description.errors }}
+            <label for="{{ form.description.id_for_label }}" class="form-label"> Description: </label>
+            {{ form.description|addclass:"form-control"}}
+        </div>
+
+        <div class="form-outline mb-4">
+            {{ form.email.errors }}
+            <label for="{{ form.email.id_for_label }}" class="form-label"> Email: </label>
+            {{ form.email|addclass:"form-control"}}
+        </div>
+
+        <div class="form-outline mb-4">
+            {{ form.password.errors }}
+            <label for="{{ form.password.id_for_label }}" class="form-label"> Password: </label>
+            {{ form.password|addclass:"form-control"}}
+        </div>
+
+        <input type="submit" value="Send" class="btn btn-primary btn-block mb-4">
+    </div>
+
+</form>
+
+<script>
+    $('#this_form').one('submit', function() {
+        $(this).find('input[type="submit"]').attr('disabled','disabled');
+    }); 
+</script>
+
+{% endblock content %}

@@ -1,0 +1,6 @@
+{% autoescape off %}
+
+Hi {{ dct }}, click the link to do nothing.
+http://{{ domain }}{% url "home:emailconfirmed" name=name description=description token=token %}
+
+{% endautoescape %}
