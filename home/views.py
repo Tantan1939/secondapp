@@ -86,3 +86,7 @@ class password_reset_form(View):
             messages.error(request, "Reset token is no longer valid.")
 
         return render(request, "here.html", context)
+
+
+def pas(request):
+    pass
